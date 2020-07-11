@@ -5,12 +5,19 @@ USER root
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get -y install curl \
-    && chmod 777 /opt \
-    && apt install -y r-base \
-    && apt-get install -y libssl-dev \
-    && apt-get install -y libcurl4-gnutls-dev \
+    && apt-get -y install \
+    curl \
+    r-base \
+    libssl-dev \
+    libcurl4-gnutls-dev \
+    ssh \
+    git \
+    tar \
+    gzip \
+    ca-certificates \
     && R -e "install.packages(c('rsconnect', 'shiny', 'DT', 'dplyr', 'markdown', 'ggplot2'))"
+
+RUN chmod 777 /opt
 
 ENV PATH="/opt/miniconda-latest/bin:$PATH"
 
